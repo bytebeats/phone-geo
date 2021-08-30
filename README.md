@@ -35,3 +35,9 @@ Kotlin版本根据手机号确定手机号运营商即归属地, 支持包括虚
 ## 感谢
 - 感谢[xluohome/phonedata](https://github.com/xluohome/phonedata)共享的数据库
 - 也参考了@EeeMt 的java实现[EeeMt/phone-number-geo](https://github.com/EeeMt/phone-number-geo)
+
+## 安全保证
+
+手机号归属地信息是通过网上公开数据进行收集整理。
+
+对手机号归属地信息数据的绝对正确，不做任何保证。因此在生产环境使用前请您自行校对测试。
