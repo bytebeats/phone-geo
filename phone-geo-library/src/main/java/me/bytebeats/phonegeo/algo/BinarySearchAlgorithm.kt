@@ -37,14 +37,14 @@ class BinarySearchAlgorithm(data: ByteArray) : LookupAlgorithm(data) {
                 compare == 0 -> return extract(phoneNumber, mid, byteBuffer)
                 mid == left -> return null
                 compare > 0 -> {
-                    mid = (left + mid) / 2
+                    val tmp = (left + mid) / 2
                     right = mid
-                    mid = alignPosition(mid)
+                    mid = alignPosition(tmp)
                 }
                 else -> {
-                    mid = (mid + right) / 2
+                    val tmp = (mid + right) / 2
                     left = mid
-                    mid = alignPosition(mid)
+                    mid = alignPosition(tmp)
                 }
             }
         }
@@ -69,7 +69,7 @@ class BinarySearchAlgorithm(data: ByteArray) : LookupAlgorithm(data) {
     }
 
     private fun parseGeo(src: String): PhoneGeoInfo {
-        val geos = src.split("\\|")
+        val geos = src.split("|")
         if (geos.size < 4) {
             throw IllegalStateException("Content format error")
         }
