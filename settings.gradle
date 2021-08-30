@@ -1,3 +1,4 @@
 rootProject.name = "phone-geo"
 include ':app'
 include ':phone-geo-library'
+include ':phone-number-formatter'
