@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         lookup.setOnClickListener {
-            PhoneNumberLookup.instance().with(LookupAlgorithm.IMPL.BINARY_SEARCH).lookup(editor.text.toString())
+            PhoneNumberLookup.instance().with(LookupAlgorithm.IMPL.SEQUENCE).lookup(editor.text.toString())
                 ?.apply {
                     province.text = geoInfo.province
                     city.text = geoInfo.city
