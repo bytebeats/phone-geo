@@ -7,7 +7,6 @@ import android.widget.EditText
 import android.widget.TextView
 import me.bytebeats.phonegeo.PhoneNumberLookup
 import me.bytebeats.phonegeo.algo.LookupAlgorithm
-import me.bytebeats.phonegeo.data.PhoneNumberInfo
 
 class MainActivity : AppCompatActivity() {
     private val editor by lazy { findViewById<EditText>(R.id.editor) }
@@ -29,7 +28,7 @@ class MainActivity : AppCompatActivity() {
                     city.text = geoInfo.city
                     zipCode.text = geoInfo.zipCode
                     areaCode.text = geoInfo.areaCode
-                    ispText.text = isp.isp
+                    ispText.text = isp.carrier
                 } ?: kotlin.run {
                 province.text = UNKNOWN
                 city.text = UNKNOWN
