@@ -2,6 +2,8 @@ package me.bytebeats.phonegeo
 
 import me.bytebeats.phonegeo.algo.BinarySearchAlgorithm
 import me.bytebeats.phonegeo.algo.LookupAlgorithm
+import me.bytebeats.phonegeo.algo.ProspectBinarySearchAlgorithm
+import me.bytebeats.phonegeo.algo.SequenceSearchAlgorithm
 import me.bytebeats.phonegeo.data.PhoneNumberInfo
 import java.io.ByteArrayOutputStream
 import java.lang.ref.WeakReference
@@ -51,7 +53,8 @@ class PhoneNumberLookup private constructor() {
             algorithmCache[algoType] = WeakReference(
                 when (algoType) {
                     LookupAlgorithm.IMPL.BINARY_SEARCH -> BinarySearchAlgorithm(srcPhoneBytes!!)
-                    else -> BinarySearchAlgorithm(srcPhoneBytes!!)
+                    LookupAlgorithm.IMPL.BINARY_SEARCH_PROSPECT -> ProspectBinarySearchAlgorithm(srcPhoneBytes!!)
+                    else -> SequenceSearchAlgorithm(srcPhoneBytes!!)
                 }
             )
         }

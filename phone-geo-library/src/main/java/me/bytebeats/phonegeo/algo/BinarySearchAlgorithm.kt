@@ -12,10 +12,10 @@ import java.nio.ByteOrder
  * @Github https://github.com/bytebeats
  * @Created on 2021/8/29 11:32
  * @Version 1.0
- * @Description TO-DO
+ * @Description Binary Search to look up data location in phone.dat file
  */
 
-class BinarySearchAlgorithm(data: ByteArray) : LookupAlgorithm(data) {
+open class BinarySearchAlgorithm(data: ByteArray) : LookupAlgorithm(data) {
     override fun lookup(phoneNumber: String): PhoneNumberInfo? {
         if (!validPhoneNumber(phoneNumber)) {
             return null
@@ -51,7 +51,7 @@ class BinarySearchAlgorithm(data: ByteArray) : LookupAlgorithm(data) {
         return null
     }
 
-    private fun alignPosition(position: Int): Int {
+    protected fun alignPosition(position: Int): Int {
         val remain = (position - indicesStartOffset) % 9
         return if ((position - indicesStartOffset) < 9) {
             position - indicesStartOffset
@@ -62,13 +62,13 @@ class BinarySearchAlgorithm(data: ByteArray) : LookupAlgorithm(data) {
         }
     }
 
-    private fun compare(position: Int, key: Int, byteBuffer: ByteBuffer): Int {
+    protected fun compare(position: Int, key: Int, byteBuffer: ByteBuffer): Int {
         byteBuffer.position(position)
         val phoneNumberPrefix = byteBuffer.int
         return phoneNumberPrefix.compareTo(key)
     }
 
-    private fun parseGeo(src: String): PhoneGeoInfo {
+    protected fun parseGeo(src: String): PhoneGeoInfo {
         val geos = src.split("|")
         if (geos.size < 4) {
             throw IllegalStateException("Content format error")
@@ -76,19 +76,18 @@ class BinarySearchAlgorithm(data: ByteArray) : LookupAlgorithm(data) {
         return PhoneGeoInfo(geos[0], geos[1], geos[2], geos[3])
     }
 
-    private fun detectInfoLength(infoStartIndex: Int, byteBuffer: ByteBuffer): Int {
+    protected fun detectInfoLength(infoStartIndex: Int, byteBuffer: ByteBuffer): Int {
         byteBuffer.position(infoStartIndex)
         while (byteBuffer.get() != 0.toByte()) {
-
         }
         val infoEndIndex = byteBuffer.position() - 1
         byteBuffer.position(infoStartIndex)
         return infoEndIndex - infoStartIndex
     }
 
-    private fun extract(phoneNumber: String, start: Int, byteBuffer: ByteBuffer): PhoneNumberInfo? {
+    protected fun extract(phoneNumber: String, start: Int, byteBuffer: ByteBuffer): PhoneNumberInfo? {
         byteBuffer.position(start)
-        val prefix = byteBuffer.int
+        val prefix = byteBuffer.int//prefix is not used, but we need ByteBuffer.getInt() to move cursor
         val infoStartIndex = byteBuffer.int
         val ispMark = byteBuffer.get()
 

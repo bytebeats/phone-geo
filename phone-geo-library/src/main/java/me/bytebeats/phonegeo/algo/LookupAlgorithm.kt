@@ -19,7 +19,7 @@ abstract class LookupAlgorithm(val data: ByteArray) {
     protected var indicesEndOffset = 0
 
     init {
-        val dataVersion = srcByteBuffer.int
+        val dataVersion = srcByteBuffer.int//dataVersion is not used, but we need ByteBuffer.getInt() to move cursor
         indicesStartOffset = srcByteBuffer.getInt(4)
         indicesEndOffset = srcByteBuffer.capacity()
     }
@@ -39,6 +39,6 @@ abstract class LookupAlgorithm(val data: ByteArray) {
     }
 
     enum class IMPL {
-        BINARY_SEARCH, SEQUENCE, BINARY_SEARCH_PROSPECT, BINARY_SEARCH_ANOTHER;
+        BINARY_SEARCH, SEQUENCE, BINARY_SEARCH_PROSPECT;
     }
 }
