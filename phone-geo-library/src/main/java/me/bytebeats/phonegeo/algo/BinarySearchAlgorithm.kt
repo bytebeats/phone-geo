@@ -89,9 +89,9 @@ open class BinarySearchAlgorithm(data: ByteArray) : LookupAlgorithm(data) {
         byteBuffer.position(start)
         val prefix = byteBuffer.int//prefix is not used, but we need ByteBuffer.getInt() to move cursor
         val infoStartIndex = byteBuffer.int
-        val ispMark = byteBuffer.get()
+        val ispCode = byteBuffer.get()
 
-        val isp = ISP.of(ispMark.toInt())
+        val isp = ISP.of(ispCode.toInt())
         val bytes = ByteArray(detectInfoLength(infoStartIndex, byteBuffer))
         byteBuffer.get(bytes)
         val geoString = String(bytes)
